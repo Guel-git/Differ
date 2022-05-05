@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct DifferApp: App {
+        
     var body: some Scene {
         WindowGroup {
-            CategoryView()
+            ViewRouter()
         }
     }
 }

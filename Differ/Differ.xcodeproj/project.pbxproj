@@ -11,10 +11,11 @@
 		523742AD281BFAA900C94D5A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 523742AC281BFAA900C94D5A /* Assets.xcassets */; };
 		523742B0281BFAA900C94D5A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 523742AF281BFAA900C94D5A /* Preview Assets.xcassets */; };
 		523742D4281BFB3900C94D5A /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523742D3281BFB3900C94D5A /* CategoryView.swift */; };
-		523742DC281BFBCA00C94D5A /* ReflectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523742DB281BFBCA00C94D5A /* ReflectionView.swift */; };
 		523742DE281BFBD900C94D5A /* StorageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523742DD281BFBD900C94D5A /* StorageView.swift */; };
 		523742E0281BFBE800C94D5A /* ActView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523742DF281BFBE800C94D5A /* ActView.swift */; };
 		523742E4281F5A5000C94D5A /* CreateListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523742E3281F5A5000C94D5A /* CreateListView.swift */; };
+		523742E72822067B00C94D5A /* HalfASheet in Frameworks */ = {isa = PBXBuildFile; productRef = 523742E62822067B00C94D5A /* HalfASheet */; };
+		5283220D282386AD00C66159 /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5283220C282386AD00C66159 /* ViewRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,10 +43,10 @@
 		523742B5281BFAA900C94D5A /* DifferTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DifferTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		523742BF281BFAA900C94D5A /* DifferUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DifferUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		523742D3281BFB3900C94D5A /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
-		523742DB281BFBCA00C94D5A /* ReflectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionView.swift; sourceTree = "<group>"; };
 		523742DD281BFBD900C94D5A /* StorageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageView.swift; sourceTree = "<group>"; };
 		523742DF281BFBE800C94D5A /* ActView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActView.swift; sourceTree = "<group>"; };
 		523742E3281F5A5000C94D5A /* CreateListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateListView.swift; sourceTree = "<group>"; };
+		5283220C282386AD00C66159 /* ViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				523742E72822067B00C94D5A /* HalfASheet in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,18 +153,9 @@
 			path = StorageView;
 			sourceTree = "<group>";
 		};
-		523742DA281BFBB300C94D5A /* ReflectionView */ = {
-			isa = PBXGroup;
-			children = (
-				523742DB281BFBCA00C94D5A /* ReflectionView.swift */,
-			);
-			path = ReflectionView;
-			sourceTree = "<group>";
-		};
 		523742E1281F5A0900C94D5A /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				523742DA281BFBB300C94D5A /* ReflectionView */,
 				523742D9281BFBA300C94D5A /* StorageView */,
 				523742D8281BFB9700C94D5A /* ActView */,
 				523742D6281BFB6800C94D5A /* CreateListView */,
@@ -174,6 +167,7 @@
 		523742E2281F5A1C00C94D5A /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				5283220C282386AD00C66159 /* ViewRouter.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -194,6 +188,9 @@
 			dependencies = (
 			);
 			name = Differ;
+			packageProductDependencies = (
+				523742E62822067B00C94D5A /* HalfASheet */,
+			);
 			productName = Differ;
 			productReference = 523742A5281BFAA600C94D5A /* Differ.app */;
 			productType = "com.apple.product-type.application";
@@ -266,6 +263,9 @@
 				Base,
 			);
 			mainGroup = 5237429C281BFAA600C94D5A;
+			packageReferences = (
+				523742E52822067B00C94D5A /* XCRemoteSwiftPackageReference "HalfASheet" */,
+			);
 			productRefGroup = 523742A6281BFAA600C94D5A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -309,9 +309,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				523742DE281BFBD900C94D5A /* StorageView.swift in Sources */,
-				523742DC281BFBCA00C94D5A /* ReflectionView.swift in Sources */,
 				523742E0281BFBE800C94D5A /* ActView.swift in Sources */,
 				523742A9281BFAA600C94D5A /* DifferApp.swift in Sources */,
+				5283220D282386AD00C66159 /* ViewRouter.swift in Sources */,
 				523742D4281BFB3900C94D5A /* CategoryView.swift in Sources */,
 				523742E4281F5A5000C94D5A /* CreateListView.swift in Sources */,
 			);
@@ -629,6 +629,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		523742E52822067B00C94D5A /* XCRemoteSwiftPackageReference "HalfASheet" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/franklynw/HalfASheet";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		523742E62822067B00C94D5A /* HalfASheet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 523742E52822067B00C94D5A /* XCRemoteSwiftPackageReference "HalfASheet" */;
+			productName = HalfASheet;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5237429D281BFAA600C94D5A /* Project object */;
 }
