@@ -13,6 +13,7 @@ struct DifferApp: App {
     var body: some Scene {
         WindowGroup {
             ViewRouter()
+                .environmentObject(ModelData())
         }
     }
 }

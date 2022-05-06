@@ -10,19 +10,17 @@ import SwiftUI
 struct ViewRouter: View {
     
     @State var viewState = "";
-    
-    init() {
-        print("여기는 view router")
-    }
+    @State var amount: Double = 0.0
+    @State var comment: String = ""
     
     var body: some View {
         switch viewState {
         case "Category":
-            CategoryView(viewState: $viewState)
+            CategoryView(viewState: $viewState, amount: $amount, comment: $comment)
         case "Storage":
-            StorageView(viewState: $viewState)
+            StorageView(viewState: $viewState, amount: $amount, comment: $comment)
         default :
-            CategoryView(viewState: $viewState)
+            CategoryView(viewState: $viewState, amount: $amount, comment: $comment)
         }
     }
     

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PageView: View {
     
-    let latest = ["친해지고 싶었던 사람에게 말 걸기", "커스텀 신발 만들기", "색다른 소스 조합 먹기"]
+    let latest = [["22.05.03", "친해지고 싶었던 사람에게 말 걸기"], ["22.05.04", "커스텀 신발 만들기"], ["22.05.05", "색다른 소스 조합 먹기"]]
     
     var body: some View {
         
@@ -18,11 +18,11 @@ struct PageView: View {
                 ZStack {
                     Color(red: 154/255, green: 194/255, blue: 135/255)
                     VStack {
-                        Text("22.04.27")
+                        Text(latest[0])
                             .font(.system(size: 13, weight: Font.Weight.regular))
                             .padding(.top, UIScreen.main.bounds.height * 0.022)
                             .padding(.bottom, UIScreen.main.bounds.height * 0.002)
-                        Text(latest)
+                        Text(latest[1])
                             .font(.system(size: 21, weight: Font.Weight.semibold))
                             .padding(.top, 0)
                         Spacer()
@@ -57,9 +57,14 @@ struct RoundedCornersShape: Shape {
 struct StorageView: View {
     
     @Binding var viewState : String
+    @State var selected = 0
+    
+    @Binding var amount: Double
+    @Binding var comment: String
     
     let category = ["옷", "교통", "음식", "휴식", "운동", "업무", "청소", "인간관계"]
-    @State var clothes = ["사놓고 안 입었던 옷 시도하기", "눈에 띄는 색으로 포인트 주기", "액세사리 하나 더 추가하기", "커스텀 신발 만들기", "사놓고 안 입었던 옷 시도하기", "사놓고 안 입었던 옷 시도하기"]
+    
+    let clothes = [["98", "눈에 띄는 색으로 포인트 주기", "색깔이 추가돼서 그런지 생기가 있었다!"], ["92", "액세사리 하나 더 추가하기", "손에 낀 반지 볼 때마다 행복.."]]
     
     var body: some View {
         
@@ -79,8 +84,6 @@ struct StorageView: View {
                                 viewState = "Category"
                             }
                     
-                    
-                   
                         Text("모음집")
                             .fontWeight(.heavy)
                             .foregroundColor(Color.black)
@@ -105,16 +108,21 @@ struct StorageView: View {
                 
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
-                        ForEach(category, id: \.self) { category in
-                            Text(category)
-                                .foregroundColor(.white)
-                                .font(.system(size: 15, weight: Font.Weight.bold))
-                                .padding(.horizontal, UIScreen.main.bounds.width * 0.04)
-                                .padding(.vertical, UIScreen.main.bounds.height * 0.009)
-                                .background(
-                                    RoundedCornersShape(corners: [.topLeft, .topRight, .bottomRight], radius: 9)
-                                        .fill(Color(red: 154/255, green: 194/255, blue: 135/255))
-                                )
+                        ForEach(category.indices) { index in
+                            Button(action: {
+                                selected = Int(index)
+//                                        print("\(selected)")
+                            }) {
+                                Text(category[index])
+                                    .foregroundColor(index == selected ? .white : Color(red: 79/255, green: 79/255, blue: 79/255))
+                                    .font(.system(size: 15, weight: Font.Weight.bold))
+                                    .padding(.horizontal, UIScreen.main.bounds.width * 0.04)
+                                    .padding(.vertical, UIScreen.main.bounds.height * 0.009)
+                                    .background(
+                                        RoundedCornersShape(corners: [.topLeft, .topRight, .bottomRight], radius: 9)
+                                            .fill(index == selected ? Color(red: 154/255, green: 194/255, blue: 135/255) : Color(red: 242/255, green: 242/255, blue: 242/255))
+                                    )
+                            }
                         }
                     }
                 } // ScrollView
@@ -134,17 +142,17 @@ struct StorageView: View {
                                         Circle()
                                             .fill(Color(red: 221/255, green: 243/255, blue: 159/255))
                                             .frame(width: UIScreen.main.bounds.width * 0.09, height: UIScreen.main.bounds.width * 0.09)
-                                        Text("35")
+                                        Text(cloth[0])
                                             .foregroundColor(Color.white)
                                             .font(.system(size: 17, weight: Font.Weight.semibold))
                                     }
                                     .padding(.trailing, UIScreen.main.bounds.width * 0.05)
                                     VStack(alignment: .leading) {
-                                        Text(cloth)
+                                        Text(cloth[1])
                                             .font(.system(size: 16, weight: Font.Weight.light))
                                             .padding(.bottom, UIScreen.main.bounds.height * 0.001)
                                             .foregroundColor(Color(red: 79/255, green: 79/255, blue: 79/255))
-                                        Text("작년에 사둔 생지 바지가 생각보다 예뻤네? ㅋㅋㅋ")
+                                        Text(cloth[2])
                                             .foregroundColor(Color(red: 166/255, green: 166/255, blue: 166/255))
                                             .font(.system(size: 11, weight: Font.Weight.medium))
                                     }
@@ -153,6 +161,28 @@ struct StorageView: View {
                                 
                                 Divider()
                             }
+                            
+                            HStack {
+                                ZStack {
+                                    Circle()
+                                        .fill(Color(red: 221/255, green: 243/255, blue: 159/255))
+                                        .frame(width: UIScreen.main.bounds.width * 0.09, height: UIScreen.main.bounds.width * 0.09)
+                                    Text(String(Int(amount)))
+                                        .foregroundColor(Color.white)
+                                        .font(.system(size: 17, weight: Font.Weight.semibold))
+                                }
+                                .padding(.trailing, UIScreen.main.bounds.width * 0.05)
+                                VStack(alignment: .leading) {
+                                    Text("사놓고 안 입었던 옷 시도하기")
+                                        .font(.system(size: 16, weight: Font.Weight.light))
+                                        .padding(.bottom, UIScreen.main.bounds.height * 0.001)
+                                        .foregroundColor(Color(red: 79/255, green: 79/255, blue: 79/255))
+                                    Text(comment)
+                                        .foregroundColor(Color(red: 166/255, green: 166/255, blue: 166/255))
+                                        .font(.system(size: 11, weight: Font.Weight.medium))
+                                }
+                            }
+                            .padding(.vertical, UIScreen.main.bounds.height * 0.02)
                         }
                         .padding(.horizontal, UIScreen.main.bounds.width * 0.05)
                         .padding(.top, UIScreen.main.bounds.height * 0.01)
@@ -160,12 +190,10 @@ struct StorageView: View {
                     .frame(height: UIScreen.main.bounds.height * 0.542)
                 }
                 
-                
                 Spacer()
                 
             } // VStack
             .padding(.horizontal, UIScreen.main.bounds.width * 0.06)
-            
             
         } // ZStack
     }

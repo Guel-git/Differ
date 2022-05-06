@@ -11,10 +11,13 @@ import HalfASheet
 struct ActView: View {
     
     @State var isShowing = false
-    @State private var amount = 0.0
-    @State private var comment: String?
+    @Binding var amount: Double
+    @Binding var comment: String
+    
+    //@Binding var selectedAct: String?
     
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
         GeometryReader { metrics in
@@ -34,17 +37,14 @@ struct ActView: View {
                                 .frame(width: 12, height: 15)
                                 .padding(.trailing, metrics.size.width * 0.05)
                         }
-                        //                        Text("모음집")
-                        //                            .foregroundColor(Color(red: 177/255, green: 177/255, blue: 177/255))
-                        //                            .onTapGesture {
-                        //                                viewState = "Storage"
-                        //                            }
                         
                         Spacer()
+                        
                     } // HStack
-                    .padding(.top, metrics.size.height * 0.02)
+                    .padding(.top, metrics.size.height * 0.01)
                     .font(.system(size: 20))
                     .padding(.bottom, metrics.size.height * 0.047)
+                    
                     
                     Text("오늘 새롭게 시도할 변화")
                         .padding(.bottom, metrics.size.height * 0.006)
@@ -57,7 +57,7 @@ struct ActView: View {
                         .foregroundColor(Color(red: 154/255, green: 194/255, blue: 135/255))
                     
                     
-                    Image("fire.one")
+                    Image("fire")
                         .resizable()
                         .frame(width: metrics.size.width * 0.7, height: metrics.size.width * 0.7)
                     
@@ -72,12 +72,13 @@ struct ActView: View {
                                 .frame(width: metrics.size.width * 0.88, height: metrics.size.height * 0.06, alignment: .center)
                                 .shadow(color: Color.black.opacity(0.06), radius: 6, x: 0, y: 0)
                             
-                            Text("도전하러 가기")
+                            Text("도전 완료")
                                 .font(.system(size: 16, weight: Font.Weight.semibold))
                                 .foregroundColor(Color.white)
-                        }
+                        } // ZStack
                     }
                     .padding(.top, metrics.size.height * 0.03)
+                    
                 } // VStack
                 .padding(.horizontal, metrics.size.width * 0.058)
                 
@@ -97,7 +98,6 @@ struct ActView: View {
                         } // HStack
                         .font(.system(size: 14, weight: Font.Weight.regular))
                         
-                        
                         HStack {
                             Text("0")
                             
@@ -115,7 +115,7 @@ struct ActView: View {
                             .font(.system(size: 14, weight: Font.Weight.regular))
                         
                         ZStack(alignment: .topLeading) {
-                            TextEditor(text: Binding($comment, replacingNilWith: ""))
+                            TextEditor(text: $comment)
                                 .padding(.leading, metrics.size.width * 0.026)
                                 .padding(.top, metrics.size.height * 0.008)
                                 .frame(width: metrics.size.width * 0.86, height: metrics.size.height * 0.086)
@@ -136,9 +136,8 @@ struct ActView: View {
                         } // ZStack
                         .padding(.bottom, metrics.size.height * 0.005)
                         
-                        
                         Button(action: {
-                            print("Hello button tapped!")
+                            self.presentationMode.wrappedValue.dismiss()
                         }) {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 3)
@@ -161,7 +160,7 @@ struct ActView: View {
                 .contentInsets(EdgeInsets(top: metrics.size.height * 0.03, leading: metrics.size.width * 0.071, bottom: metrics.size.height * 0.0, trailing: metrics.size.width * 0.071))
                 .closeButtonColor(.white)
             } // ZStack
-        } // GeometryReader
+        } // GeomtryReader
         .navigationBarHidden(true)
     }
 }

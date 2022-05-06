@@ -16,6 +16,9 @@
 		523742E4281F5A5000C94D5A /* CreateListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523742E3281F5A5000C94D5A /* CreateListView.swift */; };
 		523742E72822067B00C94D5A /* HalfASheet in Frameworks */ = {isa = PBXBuildFile; productRef = 523742E62822067B00C94D5A /* HalfASheet */; };
 		5283220D282386AD00C66159 /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5283220C282386AD00C66159 /* ViewRouter.swift */; };
+		528322122823BCA700C66159 /* DifferList.json in Resources */ = {isa = PBXBuildFile; fileRef = 528322112823BCA700C66159 /* DifferList.json */; };
+		528322142823C0BA00C66159 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528322132823C0BA00C66159 /* ModelData.swift */; };
+		528322162823C10C00C66159 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528322152823C10C00C66159 /* List.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +50,9 @@
 		523742DF281BFBE800C94D5A /* ActView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActView.swift; sourceTree = "<group>"; };
 		523742E3281F5A5000C94D5A /* CreateListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateListView.swift; sourceTree = "<group>"; };
 		5283220C282386AD00C66159 /* ViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRouter.swift; sourceTree = "<group>"; };
+		528322112823BCA700C66159 /* DifferList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DifferList.json; sourceTree = "<group>"; };
+		528322132823C0BA00C66159 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
+		528322152823C10C00C66159 /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +102,7 @@
 		523742A7281BFAA600C94D5A /* Differ */ = {
 			isa = PBXGroup;
 			children = (
+				528322102823BC7F00C66159 /* Model */,
 				523742D2281BFAEF00C94D5A /* Views */,
 				523742A8281BFAA600C94D5A /* DifferApp.swift */,
 				523742AC281BFAA900C94D5A /* Assets.xcassets */,
@@ -170,6 +177,16 @@
 				5283220C282386AD00C66159 /* ViewRouter.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		528322102823BC7F00C66159 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				528322112823BCA700C66159 /* DifferList.json */,
+				528322132823C0BA00C66159 /* ModelData.swift */,
+				528322152823C10C00C66159 /* List.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -283,6 +300,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				523742B0281BFAA900C94D5A /* Preview Assets.xcassets in Resources */,
+				528322122823BCA700C66159 /* DifferList.json in Resources */,
 				523742AD281BFAA900C94D5A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -309,11 +327,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				523742DE281BFBD900C94D5A /* StorageView.swift in Sources */,
+				528322162823C10C00C66159 /* List.swift in Sources */,
 				523742E0281BFBE800C94D5A /* ActView.swift in Sources */,
 				523742A9281BFAA600C94D5A /* DifferApp.swift in Sources */,
 				5283220D282386AD00C66159 /* ViewRouter.swift in Sources */,
 				523742D4281BFB3900C94D5A /* CategoryView.swift in Sources */,
 				523742E4281F5A5000C94D5A /* CreateListView.swift in Sources */,
+				528322142823C0BA00C66159 /* ModelData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

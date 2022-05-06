@@ -9,11 +9,27 @@ import SwiftUI
 
 struct CategoryView: View {
     
+    @Binding var viewState : String
+    @Binding var amount: Double
+    @Binding var comment: String
+    
+    
     let category = ["옷", "교통", "음식", "휴식", "운동", "업무", "청소", "인간관계"]
     
-    @State var clothes = ["사놓고 안 입었던 옷 시도하기", "눈에 띄는 색으로 포인트 주기", "액세사리 하나 더 추가하기","커스텀 신발 만들기"]
+    @State var selectedMenu = 0
+    @State var selectedList: Int?
     
-    @Binding var viewState : String
+    @State var differ: String?
+   
+    @EnvironmentObject var modelData: ModelData
+   
+    var filteredLists: [List] {
+        modelData.Lists.filter { list in
+            (list.category == category[selectedMenu])
+        }
+    }
+    
+    //@State var clothes = ["사놓고 안 입었던 옷 시도하기", "눈에 띄는 색으로 포인트 주기", "액세사리 하나 더 추가하기","커스텀 신발 만들기"]
     
     struct RoundedCornersShape: Shape {
         let corners: UIRectCorner
@@ -26,7 +42,6 @@ struct CategoryView: View {
             return Path(path.cgPath)
         }
     }
-    
     
     var body: some View {
         NavigationView {
@@ -70,17 +85,22 @@ struct CategoryView: View {
                         
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack {
-                                ForEach(category, id: \.self) { category in
-                                    Text(category)
-                                        .foregroundColor(.white)
-                                        .font(.system(size: 15, weight: Font.Weight.bold))
-                                        .padding(.horizontal, metrics.size.width * 0.04)
-                                        .padding(.vertical, metrics.size.height * 0.009)
-                                        .background(
-                                            RoundedCornersShape(corners: [.topLeft, .topRight, .bottomRight], radius: 9)
-                                                .fill(Color(red: 154/255, green: 194/255, blue: 135/255))
-                                        )
+                                ForEach(category.indices) { index in
+                                    Button(action: {
+                                        selectedMenu = Int(index)
+                                    }) {
+                                        Text(category[index])
+                                            .foregroundColor(index == selectedMenu ? .white : Color(red: 79/255, green: 79/255, blue: 79/255))
+                                            .font(.system(size: 15, weight: Font.Weight.bold))
+                                            .padding(.horizontal, metrics.size.width * 0.04)
+                                            .padding(.vertical, metrics.size.height * 0.009)
+                                            .background(
+                                                RoundedCornersShape(corners: [.topLeft, .topRight, .bottomRight], radius: 9)
+                                                    .fill(index == selectedMenu ? Color(red: 154/255, green: 194/255, blue: 135/255) : Color(red: 242/255, green: 242/255, blue: 242/255))
+                                            )
+                                    }
                                 }
+                                
                             }
                         } // ScrollView
                         .frame(maxWidth: .infinity)
@@ -89,27 +109,39 @@ struct CategoryView: View {
                         VStack(alignment: .center) {
                             ScrollView(showsIndicators: false) {
                                 
-                                ForEach(clothes, id: \.self) { cloth in
-                                    
-                                    Text(cloth)
-                                        .font(.system(size: 16, weight: Font.Weight.regular))
-                                        .foregroundColor(Color(red: 79/255, green: 79/255, blue: 79/255))
-                                        .padding(.vertical, metrics.size.height * 0.02)
-                                        .overlay(
-                                            RoundedRectangle(cornerRadius: 9)
-                                                .stroke(Color(red: 232/255, green: 232/255, blue: 232/255))
-                                                .frame(width: metrics.size.width * 0.88)
-                                            
-                                        )
-                                        .frame(width: metrics.size.width * 0.89, height: metrics.size.height * 0.071)
-                                    
+                                ForEach(filteredLists.indices) { index in
+                                    Button(action: {
+                                        //print("\(modelData.Lists[index].name)")
+                                        selectedList = Int(index)
+                                    }){
+                                        Text(filteredLists[index].name)
+                                            .font(.system(size: 16, weight: Font.Weight.regular))
+                                            .foregroundColor(index == selectedList ? Color(red: 154/255, green: 194/255, blue: 135/255) : Color(red: 79/255, green: 79/255, blue: 79/255))
+                                            .padding(.vertical, metrics.size.height * 0.02)
+                                            .overlay(
+                                                RoundedRectangle(cornerRadius: 9)
+                                                    .stroke(index == selectedList ?  Color(red: 154/255, green: 194/255, blue: 135/255) : Color(red: 232/255, green: 232/255, blue: 232/255))
+                                                    .frame(width: metrics.size.width * 0.88)
+                                                
+                                            )
+                                            .frame(width: metrics.size.width * 0.89, height: metrics.size.height * 0.071)
+                                    }
                                 }
-                                .padding(.bottom, metrics.size.height * 0.003)
                                 
-                                //.shadow(color: .black, radius: 2, x: 0, y: 0)
+                                Text(differ ?? "")
+                                    .font(.system(size: 16, weight: Font.Weight.regular))
+                                    .foregroundColor(Color(red: 79/255, green: 79/255, blue: 79/255))
+                                    .padding(.vertical, metrics.size.height * 0.02)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 9)
+                                            .stroke(differ == nil ? .white : Color(red: 232/255, green: 232/255, blue: 232/255))
+                                            .frame(width: metrics.size.width * 0.88)
+
+                                    )
+                                    .frame(width: metrics.size.width * 0.89, height: differ == nil ? 0 : metrics.size.height * 0.071)
                                 
                                 // navigationlink 로 변경
-                                NavigationLink(destination: CreateListView()) {
+                                NavigationLink(destination: CreateListView(differ: $differ)) {
                                     Text("+ 추가하기")
                                         .font(.system(size: 16, weight: Font.Weight.regular))
                                         .foregroundColor(Color(red: 79/255, green: 79/255, blue: 79/255))
@@ -124,7 +156,7 @@ struct CategoryView: View {
                             } // ScrollView
                             Spacer()
                             
-                            NavigationLink(destination: ActView()) {
+                            NavigationLink(destination: ActView(amount: $amount, comment: $comment)) {
                                 Text("도전하러 가기")
                                     .font(.system(size: 16, weight: Font.Weight.semibold))
                                     .foregroundColor(Color.white)
@@ -149,3 +181,4 @@ struct CategoryView: View {
         } // NavigationView
     }
 }
+

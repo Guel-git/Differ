@@ -58,10 +58,13 @@ struct CategoryPicker: View {
     }
 }
 
+
+
 struct CreateListView: View {
     
-    @State private var differ: String?
-    @State private var selectedCategory: Category = Category.옷
+    //@State var differ: String?
+    @Binding var differ: String?
+    @State private var selectedCategory: Category  = Category.옷
     @State private var isShowingPicker = false
     
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
@@ -71,7 +74,6 @@ struct CreateListView: View {
     let placeholder = "오늘 새롭게 시도하고 싶은\n변화 한 가지를 직접 입력해주세요."
     
     var body: some View {
-        
         
         GeometryReader { metrics in
             ZStack {
@@ -90,11 +92,6 @@ struct CreateListView: View {
                                 .frame(width: 12, height: 15)
                                 .padding(.trailing, metrics.size.width * 0.05)
                         }
-                        //                        Text("모음집")
-                        //                            .foregroundColor(Color(red: 177/255, green: 177/255, blue: 177/255))
-                        //                            .onTapGesture {
-                        //                                viewState = "Storage"
-                        //                            }
                         
                         Spacer()
                     } // HStack
@@ -166,7 +163,7 @@ struct CreateListView: View {
                     } // ZStack
                     
                     Button(action: {
-                        print("Hello button tapped!")
+                        self.mode.wrappedValue.dismiss()
                     }) {
                         ZStack {
                             RoundedRectangle(cornerRadius: 3)
@@ -192,10 +189,9 @@ struct CreateListView: View {
                     .offset(y: self.isShowingPicker ? 0 : UIScreen.main.bounds.height)
                     .pickerStyle(.wheel)
                 
-            }
+            } // ZStack
         }
         .navigationBarHidden(true)
-        
     }
 }
 
